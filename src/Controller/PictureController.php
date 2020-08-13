@@ -35,6 +35,19 @@ class PictureController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('file')->getData();
+
+            if($file) {
+                $directory = $this->getPictureDirectory();
+
+                $token = md5(bin2hex(random_bytes(16)));
+                $filename = $token.'.jpg';
+
+                $file->move($directory, $filename);
+
+                $picture->setFilename($filename);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($picture);
             $entityManager->flush();
@@ -90,5 +103,16 @@ class PictureController extends AbstractController
         }
 
         return $this->redirectToRoute('picture_index');
+    }
+
+    /**
+     * Get Picture directory
+     *
+     * @return string $directory
+     */
+    protected function getPictureDirectory() {
+        $directory = $this->getParameter('kernel.project_dir');
+        $directory = realpath($directory.'/storage/picture');
+        return $directory;
     }
 }
