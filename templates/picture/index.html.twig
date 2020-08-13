@@ -3,35 +3,43 @@
 {% block title %}Picture index{% endblock %}
 
 {% block body %}
-    <h1>Picture index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Filename</th>
-                <th>Title</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for picture in pictures %}
-            <tr>
-                <td>{{ picture.id }}</td>
-                <td>{{ picture.filename }}</td>
-                <td>{{ picture.title }}</td>
-                <td>
-                    <a href="{{ path('picture_show', {'id': picture.id}) }}">show</a>
-                    <a href="{{ path('picture_edit', {'id': picture.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>My Pix</h1>
 
-    <a href="{{ path('picture_new') }}">Create new</a>
+                <a class="btn btn-primary mt-3" href="{{ path('picture_new') }}">Create new</a>
+
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Filename</th>
+                            <th>Title</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for picture in pictures %}
+                        <tr>
+                            <td>#{{ picture.id }}</td>
+                            <td>{{ picture.filename }}</td>
+                            <td>{{ picture.title }}</td>
+                            <td>
+                                <a href="{{ path('picture_show', {'id': picture.id}) }}">show</a>
+                                <a href="{{ path('picture_edit', {'id': picture.id}) }}">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
 {% endblock %}
