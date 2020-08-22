@@ -24,6 +24,9 @@
                     {% for picture in pictures %}
                         <tr>
                             <td>#{{ picture.id }}</td>
+                            <td>
+                                <img class="picture" src="{{ asset('images/pictures/' ~ picture.filename) }}" />
+                            </td>
                             <td>{{ picture.filename }}</td>
                             <td>{{ picture.title }}</td>
                             <td>
