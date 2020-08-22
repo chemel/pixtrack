@@ -20,20 +20,10 @@ class PictureTrackController extends AbstractController
             throw $this->createNotFoundException('Picture not found');
         }
 
-        $file = $this->getPictureDirectory() . '/' . $picture->getFilename();
+        $directory = $this->getParameter('kernel.project_dir') . '/' . $this->getParameter('pictures_directory');
+        $file = $directory . '/' . $picture->getFilename();
         $response = new BinaryFileResponse($file);
 
         return $response;
-    }
-
-    /**
-     * Get Picture directory
-     *
-     * @return string $directory
-     */
-    protected function getPictureDirectory() {
-        $directory = $this->getParameter('kernel.project_dir');
-        $directory = realpath($directory.'/storage/picture');
-        return $directory;
     }
 }

@@ -38,7 +38,7 @@ class PictureController extends AbstractController
             $file = $form->get('file')->getData();
 
             if($file) {
-                $directory = $this->getPictureDirectory();
+                $directory = $this->getParameter('kernel.project_dir') . '/' . $this->getParameter('pictures_directory');
 
                 $token = md5(bin2hex(random_bytes(16)));
                 $filename = $token.'.jpg';
