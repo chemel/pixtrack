@@ -8,5 +8,6 @@ use App\Controller\IndexController;
 $request = Request::createFromGlobals();
 
 $controller = new IndexController();
-$controller->index($request);
+$response = $controller->index($request);
+$response->send();
 exit();
